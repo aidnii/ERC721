@@ -19,5 +19,7 @@ contract SimpleMint is ERC721, Ownable {
         isMintEnabled = !isMintEnabled;
     }
 
-    
+    function setMaxSupply(uint256 _maxSupply) external onlyOwner {
+        maxSupply = _maxSupply;
+    }
 }

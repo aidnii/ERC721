@@ -22,4 +22,16 @@ contract SimpleMint is ERC721, Ownable {
     function setMaxSupply(uint256 _maxSupply) external onlyOwner {
         maxSupply = _maxSupply;
     }
+
+    function mint() external payable {
+        require(isMintEnabled, 'Minting is not enabled');
+        require(mintedWallets[msg.sender] < 1, 'Exceeds max number per wallet');
+        require(msg.value == mintPrice, 'Wrong Value');
+        require(maxSupply > totalSupply, 'Sold out');
+
+        mintedWallets[msg.sender]++;
+        totalSupply++;
+        uint256 tokenId = totalSupply;
+        _safeMint((msg.sender), tokenId);
+    }
 }

@@ -14,4 +14,10 @@ contract SimpleMint is ERC721, Ownable {
     constructor() payable ERC721('Simple Mint', 'SM') {
         maxSupply = 3;
     }
+
+    function toggleIsMintEnabled() external onlyOwner {
+        isMintEnabled = !isMintEnabled;
+    }
+
+    
 }
